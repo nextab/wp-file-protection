@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+# Überprüfe, ob die Anfrage für eine Datei gilt.
+RewriteCond %{REQUEST_FILENAME} -f
+# Anstatt die Datei direkt per URL auszuliefern, übermittle die Anfrage an ein PHP-Skript, das die Validierung erledigt.
+RewriteRule ^(.*)$ edg-protected-file.php?file=$1 [QSA,L]
+</IfModule>
+
+<FilesMatch "edg-protected-file.php">
+Allow from all
+</FilesMatch>
